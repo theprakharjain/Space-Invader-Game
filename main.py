@@ -3,7 +3,7 @@ import random
 import math
 from pygame import mixer
 
-# *************************************  INITIALIZATION  ******************************************************
+# ****************************************  INITIALIZATION  ******************************************************
 # Initialize the pygame
 pygame.init()
 
@@ -16,15 +16,15 @@ screen = pygame.display.set_mode((800, 600))
 def main():
 
     # Background Image
-    background = pygame.image.load("space_background2.jpg")
+    background = pygame.image.load("images\space_background2.jpg")
 
     # Background Sound (mixer.music is used when the sound is continuous)
-    mixer.music.load("background.wav")
+    mixer.music.load("sounds\Background.wav")
     mixer.music.play(-1)  # Adding "-1" makes it play on a loop
 
     # Title and Icon
     pygame.display.set_caption("The Space Invaders")
-    icon = pygame.image.load("spaceship.png")
+    icon = pygame.image.load("images\spaceship.png")
     pygame.display.set_icon(icon)
 
     # *************************************  VARIABLES AND CLASSES  ******************************************************
@@ -50,7 +50,7 @@ def main():
                              (self.x, self.y, self.width, self.height), 0)
 
             if self.text != "":
-                button_font = pygame.font.Font("freesansbold.ttf", 24)
+                button_font = pygame.font.Font("font\Freesansbold.ttf", 24)
                 text = button_font.render(self.text, True, (255, 255, 255))
                 screen.blit(text, (self.x + (self.width/2 - text.get_width()/2),
                                    self.y + (self.height/2 - text.get_height()/2)))
@@ -63,7 +63,7 @@ def main():
                     return False
 
     # Player image and position
-    player_img = pygame.image.load("player.png")
+    player_img = pygame.image.load("images\player.png")
     playerX = 370
     playerY = 480
     playerX_change = 0
@@ -78,14 +78,14 @@ def main():
     num_of_enemies = 6
 
     for i in range(num_of_enemies):
-        enemy_img.append(pygame.image.load("alien1.png"))
+        enemy_img.append(pygame.image.load("images\Alien1.png"))
         enemyX.append(random.randint(0, 736))
         enemyY.append(random.randint(50, 150))
         enemyX_change.append(3)
         enemyY_change.append(40)
 
     # # Bullet image and position
-    bullet_img = pygame.image.load("bullet.png")
+    bullet_img = pygame.image.load("images\Bullet.png")
     bulletX = 0
     bulletY = 480
     bulletX_change = 0
@@ -97,18 +97,18 @@ def main():
 
     # Score
     score_value = 0
-    font = pygame.font.Font("freesansbold.ttf", 32)
+    font = pygame.font.Font("font\Freesansbold.ttf", 32)
 
     # score position on screen
     textX = 10
     textY = 10
 
     # Game over text
-    game_over_font = pygame.font.Font("freesansbold.ttf", 64)
+    game_over_font = pygame.font.Font("font\Freesansbold.ttf", 60)
 
     # Game Re-start Button
-    greenbutton = button((0, 255, 0), 330, 350,
-                         150, 60, "Play Again")
+    greenbutton = button((0, 255, 0), 330, 380,
+                         150, 60, "PLAY AGAIN")
 
     # *************************************  FUNCTIONS  ******************************************************
 
@@ -122,8 +122,9 @@ def main():
     # Function to show game over text
 
     def game_over_text():
-        over_text = game_over_font.render("GAME OVER", True, (255, 255, 255))
-        screen.blit(over_text, (200, 250))
+        over_text = game_over_font.render(
+            "GAME OVER", True, (255, 255, 255))
+        screen.blit(over_text, (220, 250))
 
     def player(x, y):
         # Drawing image of Player on screen
@@ -180,7 +181,7 @@ def main():
                 if event.key == pygame.K_SPACE:
                     if bullet_state == "ready":  # So space doesnt changes the direction of bullet after firing
                         # To play bullet sound
-                        bullet_sound = mixer.Sound("laser.wav")
+                        bullet_sound = mixer.Sound("sounds\laser.wav")
                         bullet_sound.play()
 
                         bulletX = playerX  # So that bullet does not follow the ship after firing
@@ -224,6 +225,7 @@ def main():
                     enemyY[j] = 2000
 
                 game_over_text()
+                screen.blit(enemy_img[0], (370, 180))
 
                 # Restart Button Display
                 greenbutton.draw(screen, outline=True)
@@ -244,7 +246,7 @@ def main():
             if collision == True:
 
                 # To play explosion sound
-                explosion_sound = mixer.Sound("explosion.wav")
+                explosion_sound = mixer.Sound("sounds\explosion.wav")
                 explosion_sound.play()
 
                 # reseting the bullet after the collision
