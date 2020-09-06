@@ -148,6 +148,7 @@ def main():
         else:
             return False
 
+    # Function to change the state of bullet from "ready" to "fire"
     def fire_bullet(x, y):
         global bullet_state
         bullet_state = "fire"
@@ -284,4 +285,5 @@ def main():
         pygame.display.update()
 
 
+# Execution of Main Function
 main()
