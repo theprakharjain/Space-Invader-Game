@@ -138,7 +138,7 @@ def main():
 
     def is_collision(enemyX, enemyY, bulletX, bulletY):
 
-        # Math formula to compute distace between 2 coordinates
+        # Math formula to compute distance between 2 coordinates
         distance = math.sqrt(math.pow((enemyX-bulletX), 2) +
                              math.pow((enemyY-bulletY), 2))
 
